@@ -1,0 +1,22 @@
+/* 三角形 */
+@mixin triangle($borderWidth: 10px, $shapeColor: #666, $direction: up) {
+    width: 0;
+    height: 0;
+    border: $borderWidth solid transparent;
+
+    @if($direction == 'up') {
+        border-bottom: 2 * $borderWidth solid $shapeColor;
+    }
+
+    @if($direction == 'down') {
+        border-top: 2 * $borderWidth solid $shapeColor;
+    }
+
+    @if($direction == 'left') {
+        border-right: 2 * $borderWidth solid $shapeColor;
+    }
+
+    @if($direction == 'right') {
+        border-left: 2 * $borderWidth solid $shapeColor;
+    }
+}

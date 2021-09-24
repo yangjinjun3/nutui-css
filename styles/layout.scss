@@ -1,0 +1,35 @@
+/* 垂直水平居中 */
+@mixin center($layout: flex) {
+    @if($layout == 'absolute') {
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+    }
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 一侧固定宽度，另一侧宽度自适应 */
+@mixin one-side-fixed-width($width: 100px) {
+    display: flex;
+    word-break: break-all;
+
+    > .fixed-side{
+        width: #{$width};
+    }
+    
+    > :not(.fixed-side) {
+        flex: 1;
+    }
+}
+
+/* 分散对齐 */
+.justify {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+

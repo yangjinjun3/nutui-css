@@ -1,0 +1,40 @@
+/* 文本溢出显示省略号 */
+@mixin text-overflow($width:100%, $display: block, $line:1) {
+    width: #{$width};
+    overflow: hidden;
+
+    @if($display == '-webkit-box') {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: #{$line};
+    }
+    @else {
+        display: #{$display};
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+/*
+* 功能：1px 物理像素
+* 前提：正确设置 meta 标签，即 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+*/
+%one-physical-pixel {
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+    
+        @media screen and(-webkit-min-device-pixel-ratio:2) {
+            transform: scaleY(0.5);
+        }
+            
+        @media screen and(-webkit-min-device-pixel-ratio:3) {
+            transform: scaleY(0.333333);
+        }
+    }
+}
+

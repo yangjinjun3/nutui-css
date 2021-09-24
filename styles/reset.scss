@@ -1,0 +1,23 @@
+/* 去除 chrome 中文本框/域默认的黄色背景 */
+input[type="text"]:-webkit-autofill,
+textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+/* IOS 默认文本框/域阴影 */
+input[type="text"],
+textarea {
+	-webkit-appearance: none;
+}
+
+/* 列表 */
+ol,
+ul {
+	list-style: none;
+}
+
+/* 表格 */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
