@@ -1,0 +1,33 @@
+@import './variable.scss';
+@import './layout.scss';
+@import './mixin.scss';
+
+/* 三个点 */
+.three-dots {
+    display: flex;
+    align-items: center;
+
+    > :nth-child(2) {
+        @include disc;
+    }
+
+    > :first-child,
+    > :last-child {
+        width: 5px;
+        height: 2px;
+        border-radius: 1px;
+        background-color: #999;
+    }
+}
+
+/* 购物车数量 */
+@mixin cart-num($diameter: 10px, $color: $gray) {
+    width: #{$diameter};
+    height: #{$diameter};
+    border-radius: 50%;
+    background-color: $white;
+    color: #{$color};
+    border: 1px solid currentColor;
+
+    @include center;
+}

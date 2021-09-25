@@ -29,9 +29,10 @@
 }
 
 /* 两侧固定宽度，中间宽度自适应 */
-@mixin two-sides-fixed-width($leftWidth: 100px, $rightWidth: 100px) {
+@mixin two-sides-fixed-width($leftWidth: 100px, $rightWidth: 100px, $alignItems: center) {
     display: flex;
     word-break: break-all;
+    align-items: #{$alignItems};
 
     > :first-child {
         width: #{$leftWidth};
@@ -53,3 +54,28 @@
     align-items: center;
 }
 
+/* 圣杯布局 */
+@mixin grail-layout($wholeHeight: 500px, $topHeight: 50px, $bottomHeight: 50px){
+    height: #{$wholeHeight};
+    display: flex;
+    flex-direction: column;
+    word-break: break-all;
+
+    > :first-child,
+    > :last-child {
+        flex-shrink: 0;
+    }
+
+    > :first-child {
+        height: #{$topHeight};
+    }
+
+    > :nth-child(2) {
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    > :last-child {
+        height: #{$bottomHeight};
+    }
+}
