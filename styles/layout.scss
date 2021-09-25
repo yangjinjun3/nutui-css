@@ -7,9 +7,11 @@
         transform: translate(-50%,-50%);
     }
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @else {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 /* 一侧固定宽度，另一侧宽度自适应 */
@@ -23,6 +25,24 @@
     
     > :not(.fixed-side) {
         flex: 1;
+    }
+}
+
+/* 两侧固定宽度，中间宽度自适应 */
+@mixin two-sides-fixed-width($leftWidth: 100px, $rightWidth: 100px) {
+    display: flex;
+    word-break: break-all;
+
+    > :first-child {
+        width: #{$leftWidth};
+    }
+
+    > :nth-child(2) {
+        flex: 1;
+    }
+
+    > :last-child {
+        width: #{$rightWidth};
     }
 }
 

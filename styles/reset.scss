@@ -1,3 +1,22 @@
+/* 滚动条滑动 */
+html {
+	scroll-behavior: smooth;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	-webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/* windows 系统美化 chrome 滚动条 */
+html::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+html::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.45);
+}
+
 /* 去除 chrome 中文本框/域默认的黄色背景 */
 input[type="text"]:-webkit-autofill,
 textarea:-webkit-autofill {
@@ -20,4 +39,10 @@ ul {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+/* 置灰状态的鼠标样式 */
+.disabled,
+[disabled] {
+	cursor: not-allowed;
 }

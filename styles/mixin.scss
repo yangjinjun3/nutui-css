@@ -1,12 +1,13 @@
 /* 文本溢出显示省略号 */
-@mixin text-overflow($width:100%, $display: block, $line:1) {
+@mixin text-overflow($width:'', $display: '', $line:1) {
     width: #{$width};
     overflow: hidden;
 
     @if($display == '-webkit-box') {
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: #{$line};
+        -webkit-line-clamp: $line;
+        word-break: break-all;
     }
     @else {
         display: #{$display};

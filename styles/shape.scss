@@ -1,22 +1,36 @@
+@import './variable.scss';
+
 /* 三角形 */
-@mixin triangle($borderWidth: 10px, $shapeColor: #666, $direction: up) {
+@mixin triangle($borderWidth: 10px, $shapeColor: $gray, $direction: up) {
     width: 0;
     height: 0;
     border: $borderWidth solid transparent;
+    
+    $borderStyle: 2 * $borderWidth solid #{$shapeColor};
 
     @if($direction == 'up') {
-        border-bottom: 2 * $borderWidth solid $shapeColor;
+        border-bottom: $borderStyle;
     }
 
     @if($direction == 'down') {
-        border-top: 2 * $borderWidth solid $shapeColor;
+        border-top: $borderStyle;
     }
 
     @if($direction == 'left') {
-        border-right: 2 * $borderWidth solid $shapeColor;
+        border-right: $borderStyle;
     }
 
     @if($direction == 'right') {
-        border-left: 2 * $borderWidth solid $shapeColor;
+        border-left: $borderStyle;
     }
 }
+
+/* 实心圆 */
+@mixin disc($diameter: 5px, $bgColor: $gray, $display: '') {
+    width: #{$diameter};
+    height: #{$diameter};
+    background-color: #{$bgColor};
+    display: #{$display};
+    border-radius: 50%;
+}
+
