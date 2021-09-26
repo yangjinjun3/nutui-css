@@ -31,3 +31,40 @@
 
     @include center;
 }
+
+/* 
+* 图片遮罩层 
+* shape: circle | rectangle
+*/
+@mixin image-mask($opacity: 0.7, $shape: circle, $height: 50px) {
+    > .mask,
+    > .mask-text {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        @if($shape == 'circle') {
+            top: 0;
+        }
+        @else {
+            height: #{$height};
+        }
+    }
+
+    > .mask {
+        z-index: 1;
+        background-color: $black;
+        opacity: #{$opacity};
+        
+        @if($shape == 'circle') {
+            border-radius: 50%;
+        }
+    }
+
+    > .mask-text {
+        z-index: 2;
+        color: $white;
+
+        @include center;
+    }
+}
