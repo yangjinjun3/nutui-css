@@ -1,0 +1,12 @@
+<script setup>
+</script>
+
+<template>
+  <div class="ymh">afdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafdaafda</div>
+</template>
+
+<style lang="scss">
+.ymh {
+  @include text-overflow('100px', '-webkit-box', 3);
+}
+</style>

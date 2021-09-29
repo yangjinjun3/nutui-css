@@ -1,0 +1,327 @@
+
+@import './variable.scss';
+@import './layout.scss';
+@import './mixin.scss';
+
+/* 三个点 */
+.three-dots {
+    display: flex;
+    align-items: center;
+
+    > :nth-child(2) {
+        @include disc;
+    }
+
+    > :first-child,
+    > :last-child {
+        width: 5px;
+        height: 2px;
+        border-radius: 1px;
+        background-color: #999;
+    }
+}
+
+/* loading */
+@mixin loading() {
+}
+
+/* 
+* 图片遮罩层 
+* shape: circle | rectangle
+*/
+@mixin image-mask($opacity: 0.7, $shape: circle, $height: 50px) {
+    > .mask,
+    > .mask-text {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        @if($shape == 'circle') {
+            top: 0;
+        }
+        @else {
+            height: #{$height};
+        }
+    }
+
+    > .mask {
+        z-index: 1;
+        background-color: $black;
+        opacity: #{$opacity};
+        
+        @if($shape == 'circle') {
+            border-radius: 50%;
+        }
+    }
+
+    > .mask-text {
+        z-index: 2;
+        color: $white;
+
+        @include center;
+    }
+}
+@charset "utf-8";
+@import './reset.scss';
+@import './variable.scss';
+@import './animation.scss';
+@import './mixin.scss';
+@import './layout.scss';
+@import './shape.scss';
+@import './component.scss';
+/* 垂直水平居中 */
+@mixin center($layout: flex) {
+    @if($layout == 'absolute') {
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+    }
+
+    @else {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* 一侧固定宽度，另一侧宽度自适应 */
+@mixin one-side-fixed-width($width: 100px) {
+    display: flex;
+    word-break: break-all;
+
+    > .fixed-side{
+        width: #{$width};
+    }
+    
+    > :not(.fixed-side) {
+        flex: 1;
+    }
+}
+
+/* 两侧固定宽度，中间宽度自适应 */
+@mixin two-sides-fixed-width($leftWidth: 100px, $rightWidth: 100px, $alignItems: center) {
+    display: flex;
+    word-break: break-all;
+    align-items: #{$alignItems};
+
+    > :first-child {
+        width: #{$leftWidth};
+    }
+
+    > :nth-child(2) {
+        flex: 1;
+    }
+
+    > :last-child {
+        width: #{$rightWidth};
+    }
+}
+
+/* 分散对齐 */
+@mixin justify($direction: horizontal, $padding: '') {
+    display: flex;
+
+    @if($direction == 'vertical') {
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    @else {
+      justify-content: space-between;
+      align-items: center;
+
+      @if($padding) {
+        padding: #{$padding};
+      }
+    }
+}
+
+/* 圣杯布局 */
+@mixin grail-layout($wholeHeight: 500px, $topHeight: 50px, $bottomHeight: 50px){
+    height: #{$wholeHeight};
+    display: flex;
+    flex-direction: column;
+    word-break: break-all;
+
+    > :first-child,
+    > :last-child {
+        flex-shrink: 0;
+    }
+
+    > :first-child {
+        height: #{$topHeight};
+    }
+
+    > :nth-child(2) {
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    > :last-child {
+        height: #{$bottomHeight};
+    }
+}
+
+/* 两列等高布局 */
+
+/* 图文布局 */
+
+/* 对齐 */
+@mixin align($alignType: 'left', $padding: ''){
+    text-align: #{$alignType};
+
+    @if($padding) {
+        padding: #{$padding};
+    }
+}
+
+/* 等分布局 */
+@mixin grid($direction: horizontal) {
+    display: flex;
+
+    @if($direction == 'vertical') {
+      flex-direction: column;
+    }
+
+    > * {
+      flex: 1;
+    }
+}
+/* 文本溢出显示省略号 */
+@mixin text-overflow($width:'', $display: '', $line:1) {
+    width: #{$width};
+    overflow: hidden;
+
+    @if($display == '-webkit-box') {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: $line;
+        word-break: break-all;
+    }
+    @else {
+        display: #{$display};
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+/*
+* 功能：1px 物理像素
+* 前提：正确设置 meta 标签，即 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+*/
+%one-physical-pixel {
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+    
+        @media screen and(-webkit-min-device-pixel-ratio:2) {
+            transform: scaleY(0.5);
+        }
+            
+        @media screen and(-webkit-min-device-pixel-ratio:3) {
+            transform: scaleY(0.333333);
+        }
+    }
+}
+
+
+/* 滚动条滑动 */
+html {
+	scroll-behavior: smooth;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	-webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/* windows 系统美化 chrome 滚动条 */
+html::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+html::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.45);
+}
+
+/* 去除 chrome 中文本框/域默认的黄色背景 */
+input[type="text"]:-webkit-autofill,
+textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+/* IOS 默认文本框/域阴影 */
+input[type="text"],
+textarea {
+	-webkit-appearance: none;
+}
+
+/* 列表 */
+ol,
+ul {
+	list-style: none;
+}
+
+/* 表格 */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* 文本域 */
+textarea {
+	resize: none;
+}
+
+/* 置灰状态的鼠标样式 */
+.disabled,
+[disabled] {
+	cursor: not-allowed;
+	pointer-events: none;
+}
+@import './variable.scss';
+
+/* 三角形 */
+@mixin triangle($borderWidth: 10px, $shapeColor: $gray, $direction: up) {
+    width: 0;
+    height: 0;
+    border: $borderWidth solid transparent;
+    
+    $borderStyle: 2 * $borderWidth solid #{$shapeColor};
+
+    @if($direction == 'up') {
+        border-bottom: $borderStyle;
+    }
+
+    @if($direction == 'down') {
+        border-top: $borderStyle;
+    }
+
+    @if($direction == 'left') {
+        border-right: $borderStyle;
+    }
+
+    @if($direction == 'right') {
+        border-left: $borderStyle;
+    }
+}
+
+/* 实心圆 */
+@mixin disc($diameter: 5px, $bgColor: $gray, $display: '') {
+    width: #{$diameter};
+    height: #{$diameter};
+    background-color: #{$bgColor};
+    display: #{$display};
+    border-radius: 50%;
+}
+
+/* 宽高二比一矩形 */
+/* 颜色 */
+$red: #f00;
+$white: #fff;
+$black: #000;
+$gray: #666;

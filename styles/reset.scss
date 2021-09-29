@@ -41,6 +41,11 @@ table {
 	border-spacing: 0;
 }
 
+/* 文本域 */
+textarea {
+	resize: none;
+}
+
 /* 置灰状态的鼠标样式 */
 .disabled,
 [disabled] {
