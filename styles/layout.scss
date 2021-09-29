@@ -48,10 +48,21 @@
 }
 
 /* 分散对齐 */
-.justify {
+@mixin justify($direction: horizontal, $padding: '') {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+
+    @if($direction == 'vertical') {
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    @else {
+      justify-content: space-between;
+      align-items: center;
+
+      @if($padding) {
+        padding: #{$padding};
+      }
+    }
 }
 
 /* 圣杯布局 */
@@ -77,5 +88,31 @@
 
     > :last-child {
         height: #{$bottomHeight};
+    }
+}
+
+/* 两列等高布局 */
+
+/* 图文布局 */
+
+/* 对齐 */
+@mixin align($alignType: 'left', $padding: ''){
+    text-align: #{$alignType};
+
+    @if($padding) {
+        padding: #{$padding};
+    }
+}
+
+/* 等分布局 */
+@mixin grid($direction: horizontal) {
+    display: flex;
+
+    @if($direction == 'vertical') {
+      flex-direction: column;
+    }
+
+    > * {
+      flex: 1;
     }
 }

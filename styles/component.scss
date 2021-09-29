@@ -20,16 +20,8 @@
     }
 }
 
-/* 购物车数量 */
-@mixin cart-num($diameter: 10px, $color: $gray) {
-    width: #{$diameter};
-    height: #{$diameter};
-    border-radius: 50%;
-    background-color: $white;
-    color: #{$color};
-    border: 1px solid currentColor;
-
-    @include center;
+/* loading */
+@mixin loading() {
 }
 
 /* 
