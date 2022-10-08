@@ -1,24 +1,5 @@
-@import './variable.scss';
 @import './layout.scss';
 @import './mixin.scss';
-
-/* 三个点 */
-.three-dots {
-    display: flex;
-    align-items: center;
-
-    > :nth-child(2) {
-        @include disc;
-    }
-
-    > :first-child,
-    > :last-child {
-        width: 5px;
-        height: 2px;
-        border-radius: 1px;
-        background-color: #999;
-    }
-}
 
 /* loading */
 @mixin loading() {
@@ -28,7 +9,9 @@
 * 图片遮罩层 
 * shape: circle | rectangle
 */
-@mixin image-mask($opacity: 0.7, $shape: circle, $height: 50px) {
+@mixin image-mask($opacity: 0.7, $shape: circle, $zIndex: 1) {
+    position: relative;
+
     > .mask,
     > .mask-text {
         position: absolute;
@@ -38,14 +21,11 @@
         @if($shape == 'circle') {
             top: 0;
         }
-        @else {
-            height: #{$height};
-        }
     }
 
     > .mask {
-        z-index: 1;
-        background-color: $black;
+        z-index: $zIndex;
+        background-color: #000;
         opacity: #{$opacity};
         
         @if($shape == 'circle') {
@@ -54,8 +34,9 @@
     }
 
     > .mask-text {
-        z-index: 2;
-        color: $white;
+        z-index: $zIndex + 1;
+        color: #fff;
+        word-break: break-all;
 
         @include center;
     }

@@ -1,12 +1,12 @@
-@import './variable.scss';
-
 /* 三角形 */
-@mixin triangle($borderWidth: 10px, $shapeColor: $gray, $direction: up) {
+@mixin triangle($borderWidth: 10, $shapeColor: #666, $direction: up) {
     width: 0;
     height: 0;
-    border: $borderWidth solid transparent;
+    border: if(type-of($borderWidth) == 'number', #{$borderWidth} + 'px', #{$borderWidth}) solid transparent;
+
+    $doubleBorderWidth: 2 * $borderWidth;
     
-    $borderStyle: 2 * $borderWidth solid #{$shapeColor};
+    $borderStyle: if(type-of($doubleBorderWidth) == 'number', #{$doubleBorderWidth} + 'px', #{$doubleBorderWidth}) solid #{$shapeColor};
 
     @if($direction == 'up') {
         border-bottom: $borderStyle;
@@ -26,11 +26,16 @@
 }
 
 /* 实心圆 */
-@mixin disc($diameter: 5px, $bgColor: $gray, $display: '') {
-    width: #{$diameter};
-    height: #{$diameter};
-    background-color: #{$bgColor};
-    display: #{$display};
+@mixin disc($diameter: 15, $bgColor: #666) {
+    width: if(type-of($diameter) == 'number', #{$diameter} + 'px', #{$diameter});
+    height: if(type-of($diameter) == 'number', #{$diameter} + 'px', #{$diameter});
+    @if(str-index(#{$bgColor}, 'gradient') == null) {
+      background-color: #{$bgColor};
+    }
+
+    @else {
+      background-image: #{$bgColor};
+    }
     border-radius: 50%;
 }
 

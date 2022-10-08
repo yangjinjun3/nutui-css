@@ -1,25 +1,6 @@
 
-@import './variable.scss';
 @import './layout.scss';
 @import './mixin.scss';
-
-/* 三个点 */
-.three-dots {
-    display: flex;
-    align-items: center;
-
-    > :nth-child(2) {
-        @include disc;
-    }
-
-    > :first-child,
-    > :last-child {
-        width: 5px;
-        height: 2px;
-        border-radius: 1px;
-        background-color: #999;
-    }
-}
 
 /* loading */
 @mixin loading() {
@@ -29,7 +10,9 @@
 * 图片遮罩层 
 * shape: circle | rectangle
 */
-@mixin image-mask($opacity: 0.7, $shape: circle, $height: 50px) {
+@mixin image-mask($opacity: 0.7, $shape: circle, $zIndex: 1) {
+    position: relative;
+
     > .mask,
     > .mask-text {
         position: absolute;
@@ -39,14 +22,11 @@
         @if($shape == 'circle') {
             top: 0;
         }
-        @else {
-            height: #{$height};
-        }
     }
 
     > .mask {
-        z-index: 1;
-        background-color: $black;
+        z-index: $zIndex;
+        background-color: #000;
         opacity: #{$opacity};
         
         @if($shape == 'circle') {
@@ -55,27 +35,31 @@
     }
 
     > .mask-text {
-        z-index: 2;
-        color: $white;
+        z-index: $zIndex + 1;
+        color: #fff;
+        word-break: break-all;
 
         @include center;
     }
 }
 @charset "utf-8";
 @import './reset.scss';
-@import './variable.scss';
 @import './animation.scss';
 @import './mixin.scss';
 @import './layout.scss';
 @import './shape.scss';
 @import './component.scss';
 /* 垂直水平居中 */
-@mixin center($layout: flex) {
-    @if($layout == 'absolute') {
-        position: absolute;
-        top:50%;
-        left:50%;
-        transform: translate(-50%,-50%);
+@mixin center($layoutType: flex) {
+    @if($layoutType == 'absolute') {
+        position: relative;
+
+        > :first-child {
+          position: absolute;
+          top:50%;
+          left:50%;
+          transform: translate(-50%,-50%);
+        }
     }
 
     @else {
@@ -86,12 +70,12 @@
 }
 
 /* 一侧固定宽度，另一侧宽度自适应 */
-@mixin one-side-fixed-width($width: 100px) {
+@mixin one-side-fixed-width($width: 100) {
     display: flex;
     word-break: break-all;
 
     > .fixed-side{
-        width: #{$width};
+        width: if(type-of($width) == 'number', #{$width} + 'px', #{$width});
     }
     
     > :not(.fixed-side) {
@@ -100,13 +84,13 @@
 }
 
 /* 两侧固定宽度，中间宽度自适应 */
-@mixin two-sides-fixed-width($leftWidth: 100px, $rightWidth: 100px, $alignItems: center) {
+@mixin two-sides-fixed-width($leftWidth: 100, $rightWidth: 100, $alignItems: normal) {
     display: flex;
     word-break: break-all;
     align-items: #{$alignItems};
 
     > :first-child {
-        width: #{$leftWidth};
+        width: if(type-of($leftWidth) == 'number', #{$leftWidth} + 'px', #{$leftWidth});
     }
 
     > :nth-child(2) {
@@ -114,20 +98,19 @@
     }
 
     > :last-child {
-        width: #{$rightWidth};
+        width: if(type-of($rightWidth) == 'number', #{$rightWidth} + 'px', #{$rightWidth});
     }
 }
 
 /* 分散对齐 */
 @mixin justify($direction: horizontal, $padding: '') {
     display: flex;
+    justify-content: space-between;
 
     @if($direction == 'vertical') {
       flex-direction: column;
-      justify-content: space-between;
     }
     @else {
-      justify-content: space-between;
       align-items: center;
 
       @if($padding) {
@@ -137,19 +120,14 @@
 }
 
 /* 圣杯布局 */
-@mixin grail-layout($wholeHeight: 500px, $topHeight: 50px, $bottomHeight: 50px){
-    height: #{$wholeHeight};
+@mixin grail-layout($wholeHeight: 500, $topHeight: 50, $bottomHeight: 50){
+    height: if(type-of($wholeHeight) == 'number', #{$wholeHeight} + 'px', #{$wholeHeight});
     display: flex;
     flex-direction: column;
     word-break: break-all;
 
-    > :first-child,
-    > :last-child {
-        flex-shrink: 0;
-    }
-
     > :first-child {
-        height: #{$topHeight};
+        height: if(type-of($topHeight) == 'number', #{$topHeight} + 'px', #{$topHeight});
     }
 
     > :nth-child(2) {
@@ -158,22 +136,13 @@
     }
 
     > :last-child {
-        height: #{$bottomHeight};
+        height: if(type-of($bottomHeight) == 'number', #{$bottomHeight} + 'px', #{$bottomHeight});
     }
 }
 
 /* 两列等高布局 */
 
 /* 图文布局 */
-
-/* 对齐 */
-@mixin align($alignType: 'left', $padding: ''){
-    text-align: #{$alignType};
-
-    @if($padding) {
-        padding: #{$padding};
-    }
-}
 
 /* 等分布局 */
 @mixin grid($direction: horizontal) {
@@ -188,20 +157,19 @@
     }
 }
 /* 文本溢出显示省略号 */
-@mixin text-overflow($width:'', $display: '', $line:1) {
+@mixin text-overflow($width:'', $line:1) {
     width: #{$width};
     overflow: hidden;
 
-    @if($display == '-webkit-box') {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: $line;
-        word-break: break-all;
+    @if($line == 1) {
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
-    @else {
-        display: #{$display};
-        white-space: nowrap;
-        text-overflow: ellipsis;
+    @if($line > 1) {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: $line;
+      word-break: break-all;
     }
 }
 
@@ -209,23 +177,42 @@
 * 功能：1px 物理像素
 * 前提：正确设置 meta 标签，即 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
 */
-%one-physical-pixel {
-    &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 1px;
-    
-        @media screen and(-webkit-min-device-pixel-ratio:2) {
-            transform: scaleY(0.5);
-        }
-            
-        @media screen and(-webkit-min-device-pixel-ratio:3) {
-            transform: scaleY(0.333333);
-        }
+@mixin one-physical-pixel-border($bStyle, $color, $bDir: null) {
+	position: relative;
+
+	&:after {
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    transform: scale(0.5);
+
+    @if($bDir == 'top' or $bDir == 'bottom') {
+      left: 0;
+      #{$bDir}: 0;
+      width: 200%;
+      height: 0;
+      transform-origin: left $bDir;
+      border-#{$bDir}: 1px $bStyle $color;
     }
+
+    @if($bDir == 'left' or $bDir == 'right') {
+      top: 0;
+      #{$bDir}: 0;
+      width: 0;
+      height: 200%;
+      transform-origin: $bDir top;
+      border-#{$bDir}: 1px $bStyle $color;
+    }
+
+    @if($bDir == null) {
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      transform-origin: left top;
+      border: 1px $bStyle $color;
+    }
+	}
 }
 
 
@@ -260,6 +247,10 @@ textarea {
 	-webkit-appearance: none;
 }
 
+/* 去除 IE 下文本框以及密码框的叉号和眼睛 */
+input::-ms-clear{display:none;}
+Input::-ms-reveal{display:none;}
+
 /* 列表 */
 ol,
 ul {
@@ -283,15 +274,15 @@ textarea {
 	cursor: not-allowed;
 	pointer-events: none;
 }
-@import './variable.scss';
-
 /* 三角形 */
-@mixin triangle($borderWidth: 10px, $shapeColor: $gray, $direction: up) {
+@mixin triangle($borderWidth: 10, $shapeColor: #666, $direction: up) {
     width: 0;
     height: 0;
-    border: $borderWidth solid transparent;
+    border: if(type-of($borderWidth) == 'number', #{$borderWidth} + 'px', #{$borderWidth}) solid transparent;
+
+    $doubleBorderWidth: 2 * $borderWidth;
     
-    $borderStyle: 2 * $borderWidth solid #{$shapeColor};
+    $borderStyle: if(type-of($doubleBorderWidth) == 'number', #{$doubleBorderWidth} + 'px', #{$doubleBorderWidth}) solid #{$shapeColor};
 
     @if($direction == 'up') {
         border-bottom: $borderStyle;
@@ -311,17 +302,17 @@ textarea {
 }
 
 /* 实心圆 */
-@mixin disc($diameter: 5px, $bgColor: $gray, $display: '') {
-    width: #{$diameter};
-    height: #{$diameter};
-    background-color: #{$bgColor};
-    display: #{$display};
+@mixin disc($diameter: 15, $bgColor: #666) {
+    width: if(type-of($diameter) == 'number', #{$diameter} + 'px', #{$diameter});
+    height: if(type-of($diameter) == 'number', #{$diameter} + 'px', #{$diameter});
+    @if(str-index(#{$bgColor}, 'gradient') == null) {
+      background-color: #{$bgColor};
+    }
+
+    @else {
+      background-image: #{$bgColor};
+    }
     border-radius: 50%;
 }
 
 /* 宽高二比一矩形 */
-/* 颜色 */
-$red: #f00;
-$white: #fff;
-$black: #000;
-$gray: #666;
