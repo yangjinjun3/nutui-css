@@ -57,3 +57,21 @@
 	}
 }
 
+/* 清除浮动 */
+@mixin clearfix {
+  &::after{
+    content:"";
+    display:table;
+    clear:both;
+  }
+}
+
+.clearfix {
+  @include clearfix;
+}
+
+/* 指定背景图像的大小 */
+@mixin backgroundSize($image, $width: 100%, $height: 100%) {
+  background-image: url($image);
+  background-size: $width $height;
+}
