@@ -7,7 +7,7 @@ export default defineConfig({
 	css: {
 		preprocessorOptions: {
 			scss: {
-				additionalData: `@import "../styles/index.scss";`
+				additionalData: `@import "node_modules/@jd/nutui-css/styles/all.scss";`
 			}
 		}
 	}
