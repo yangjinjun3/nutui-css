@@ -9,10 +9,6 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style scoped lang="scss">
-@mixin text-overflow() {
-  overflow: hidden;
-}
-
 .abc {
   width: 100px;
   @include text-overflow;
