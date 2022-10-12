@@ -2,28 +2,27 @@
 </script>
 
 <template>
-  <div class="three-dots1 clearfix">
-    <div class="abc">1111</div>
-  </div>
+    <div class="abc">111111111111111111111111111111111111</div>
 </template>
 
 <style lang="scss">
-@mixin clearfix {
-  &::after{
-    content:"";
-    display:table;
-    clear:both;
-  }
+@mixin text-overflow($line:1, $width:'') {
+    width: if(type-of($width) == 'number', #{$width} + 'px', #{$width});
+    overflow: hidden;
+
+    @if($line == 1) {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    @if($line > 1) {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: $line;
+      word-break: break-all;
+    }
 }
 
-.clearfix {
-  @include clearfix;
-}
-
-.three-dots1 {
-  border:1px solid red;
-}
 .abc {
-  float: left;
+  @include text-overflow(1, '100px')
 }
 </style>
