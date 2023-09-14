@@ -1,0 +1,49 @@
+/* 居中对齐 */
+.tc {
+    text-align: center;
+}
+
+/* 左对齐 */
+.tl {
+    text-align: left;
+}
+
+/* 右对齐 */
+.tr {
+    text-align: right;
+}
+
+/* 溢出隐藏 */
+.oh {
+    overflow: hidden;
+}
+
+/* 绝对定位 */
+.abs {
+    position: absolute;
+}
+
+/* 相对定位 */
+.rel {
+    position: relative;
+}
+
+/* 光标呈现为指示链接的指针（一只手） */
+.cp {
+    cursor: pointer;
+}
+
+/* 行内块元素 */
+.dib {
+    display: inline-block;
+}
+
+/* 此元素将显示为块级元素，此元素前后会带有换行符 */
+.db {
+    display: block;
+}
+
+/* 此元素会被显示为内联元素，元素前后没有换行符 */
+.inline {
+    display: inline;
+}

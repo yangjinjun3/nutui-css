@@ -1,0 +1,13 @@
+@import './common.less';
+
+/* IOS 默认文本框/域阴影 */
+input[type="text"],
+textarea {
+	-webkit-appearance: none;
+}
+
+/* 底部安全区域 */
+.bottom-safe-area {
+	bottom: constant(safe-area-inset-bottom);
+	bottom: env(safe-area-inset-bottom);
+}

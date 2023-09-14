@@ -1,0 +1,173 @@
+/* 宽度 */
+@mixin w($width) {
+  width: $width;
+}
+
+/* 高度 */
+@mixin h($height) {
+  height: $height;
+}
+
+/* 宽度 + 高度 */
+@mixin wh($width, $height) {
+  @include w($width);
+  @include h($height);
+}
+
+/* 字体大小 */
+@mixin fz($fontSize) {
+  font-size: $fontSize;
+}
+
+/* 字重 */
+@mixin fw($fontWeight: normal) {
+  font-weight: $fontWeight;
+}
+
+/* 字体大小 + 字重 */
+@mixin fzw($fontSize, $fontWeight: normal) {
+  @include fz($fontSize);
+  @include fw($fontWeight);
+}
+
+/* 上外边距 */
+@mixin mt($marginTop) {
+  margin-top: $marginTop;
+}
+
+/* 下外边距 */
+@mixin mb($marginBottom) {
+  margin-bottom: $marginBottom;
+}
+
+/* 左外边距 */
+@mixin ml($marginLeft) {
+  margin-left: $marginLeft;
+}
+
+/* 右外边距 */
+@mixin mr($marginRight) {
+  margin-right: $marginRight;
+}
+
+/* 左上外边距 */
+@mixin mlt($marginLeft, $marginTop) {
+  @include ml($marginLeft);
+  @include mt($marginTop);
+}
+
+/* 左下外边距 */
+@mixin mlb($marginLeft, $marginBottom) {
+  @include ml($marginLeft);
+  @include mb($marginBottom);
+}
+
+/* 右上外边距 */
+@mixin mrt($marginRight, $marginTop) {
+  @include mr($marginRight);
+  @include mt($marginTop);
+}
+
+/* 右下外边距 */
+@mixin mrb($marginRight, $marginBottom) {
+  @include mr($marginRight);
+  @include mb($marginBottom);
+}
+
+/* 上内边距 */
+@mixin pt($paddingTop) {
+  padding-top: $paddingTop;
+}
+
+/* 下内边距 */
+@mixin pb($paddingBottom) {
+  padding-bottom: $paddingBottom;
+}
+
+/* 左内边距 */
+@mixin pl($paddingLeft) {
+  padding-left: $paddingLeft;
+}
+
+/* 右内边距 */
+@mixin pr($paddingRight) {
+  padding-right: $paddingRight;
+}
+
+/* 左上内边距 */
+@mixin plt($paddingLeft, $paddingTop) {
+  @include ml($paddingLeft);
+  @include mt($paddingTop);
+}
+
+/* 左下内边距 */
+@mixin plb($paddingLeft, $paddingBottom) {
+  @include ml($paddingLeft);
+  @include mb($paddingBottom);
+}
+
+/* 右上内边距 */
+@mixin prt($paddingRight, $paddingTop) {
+  @include mr($paddingRight);
+  @include mt($paddingTop);
+}
+
+/* 右下内边距 */
+@mixin prb($paddingRight, $paddingBottom) {
+  @include mr($paddingRight);
+  @include mb($paddingBottom);
+}
+
+/* 左 + 上位移 */
+@mixin lt($left, $top) {
+  left: $left;
+  top: $top;
+}
+
+/* 左 + 下位移 */
+@mixin lb($left, $bottom) {
+  left: $left;
+  bottom: $bottom;
+}
+
+/* 右 + 上位移 */
+@mixin rt($right, $top) {
+  right: $right;
+  top: $top;
+}
+
+/* 右 + 下位移 */
+@mixin rb($right, $bottom) {
+  right: $right;
+  bottom: $bottom;
+}
+
+/* flex 布局间隙 */
+@mixin gap($gap) {
+  gap: $gap;
+}
+
+/* 圆角 */
+@mixin radius($radius){
+  border-radius: $radius;
+}
+
+/* 颜色 */
+@mixin color($color) {
+  color: $color;
+}
+
+/* 背景颜色 */
+@mixin bgColor($bgColor) {
+  background-color: $bgColor;
+}
+
+/* 行高 */
+@mixin lh($lineHeight) {
+  line-height: $lineHeight;
+}
+
+/* 设置元素的堆叠顺序 */
+@mixin index($zIndex) {
+  z-index: $zIndex;
+}

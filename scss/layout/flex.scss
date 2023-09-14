@@ -1,0 +1,32 @@
+/* flex 对齐方式 */
+@mixin flex($justifyContent: center, $alignItems: center) {
+    display: flex;
+  
+    @if ($justifyContent == 'start') {
+        justify-content: flex-start;
+    }
+  
+    @if ($justifyContent == 'center') {
+        justify-content: center;
+    }
+  
+    @if ($justifyContent == 'end') {
+        justify-content: flex-end;
+    }
+
+    @if ($justifyContent == 'between') {
+        justify-content: space-between;
+    }
+  
+    @if ($alignItems == 'start') {
+        align-items: flex-start;
+    }
+  
+    @if ($alignItems == 'center') {
+        align-items: center;
+    }
+  
+    @if ($alignItems == 'end') {
+        align-items: flex-end;
+    }
+}

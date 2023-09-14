@@ -1,0 +1,138 @@
+@import './layout/center.scss';
+@import './variable.scss';
+
+/* 三角形 */
+@mixin triangle($borderWidth: 10, $shapeColor: #666, $direction: up) {
+    width: 0;
+    height: 0;
+    border: if(unit($borderWidth) != '', #{$borderWidth}, #{$borderWidth}px) solid transparent;
+
+    $doubleBorderWidth: 2 * $borderWidth;
+    
+    $borderStyle: if(unit($doubleBorderWidth) != '', #{$doubleBorderWidth}, #{$doubleBorderWidth}px) solid #{$shapeColor};
+
+    @if($direction == 'up') {
+        border-bottom: $borderStyle;
+    }
+
+    @if($direction == 'down') {
+        border-top: $borderStyle;
+    }
+
+    @if($direction == 'left') {
+        border-right: $borderStyle;
+    }
+
+    @if($direction == 'right') {
+        border-left: $borderStyle;
+    }
+}
+
+/* 实心圆 */
+@mixin disc($diameter: 15, $bgColor: #666) {
+    border-radius: 50%;
+    width: if(unit($diameter) == '', #{$diameter} + 'px', #{$diameter});
+    height: if(unit($diameter) == '', #{$diameter} + 'px', #{$diameter});
+    @if (str-index(#{$bgColor}, 'gradient') == null) {
+      background-color: #{$bgColor};
+    }
+
+    @else {
+      background-image: #{$bgColor};
+    }
+}
+
+/* 宽高二比一矩形 */
+
+/* 
+* 图片遮罩层
+* shape: circle | rectangle
+*/
+@mixin image-mask($opacity: 0.7, $shape: circle, $zIndex: 1, $height: 30%) {
+    position: relative;
+
+    > [class$="-mask"],
+    > [class$="-text"] {
+        position: absolute;
+        inset-inline: 0;
+        bottom: 0;
+        @if ($shape == 'circle') {
+            top: 0;
+        }
+        @else {
+            height: if(unit($height) == '', #{$height} + 'px', #{$height});
+        }
+    }
+
+    > [class$="-mask"] {
+        z-index: $zIndex;
+        background-color: $black;
+        opacity: #{$opacity};
+        
+        @if($shape == 'circle') {
+            border-radius: 50%;
+        }
+    }
+
+    > [class$="-text"] {
+        z-index: $zIndex + 1;
+        color: $white;
+        word-break: break-all;
+
+        @include center;
+    }
+}
+
+/* 
+* 点
+* size: 尺寸，宽和高一样，默认是 5px
+* backgroundColor: 背景颜色，默认是白色
+* marginInline: 水平外边距，默认左右都是 5px
+*/
+@mixin point($size: 5px, $backgroundColor: $white, $marginInline: 5px) {
+    display: inline-block;
+    width: $size;
+    height: $size;
+    background-color: $backgroundColor;
+    border-radius: 50%;
+    margin-inline: $marginInline;
+    vertical-align: middle;
+}
+
+/* 
+* 间距
+* size: 间距大小，默认是 8px
+* align: 对齐方式，默认是 center，可选 start、end、baseline、center
+* direction: 间距方向，默认是 horizontal，可选 horizontal、vertical
+* wrap: 是否自动换行，仅在 horizontal 时有效，默认是 false
+*/
+@mixin space($size: 8px, $direction: horizontal, $align: center, $wrap: false) {
+    display: inline-flex;
+    gap: $size;
+
+    @if ($direction == 'vertical') {
+        flex-direction: column;
+    }
+
+    @if ($align == 'center') {
+        align-items: center;
+    }
+
+    @if ($align == 'start') {
+        align-items: flex-start;
+    }
+
+    @if ($align == 'end') {
+        align-items: flex-end;
+    }
+
+    @if ($align == 'baseline') {
+        align-items: baseline;
+    }
+
+    @if ($wrap == true) {
+        @if $direction == 'horizontal' {
+            flex-wrap: wrap;
+        }
+    }
+}

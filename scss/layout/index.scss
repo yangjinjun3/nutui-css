@@ -1,0 +1,89 @@
+@import './center.scss';
+
+/* 一侧固定宽度，另一侧宽度自适应 */
+@mixin one-side-fixed-width($width: 100) {
+    display: flex;
+    word-break: break-all;
+
+    > .fixed-side{
+        width: if(unit($width) == '', #{$width} + 'px', #{$width});
+    }
+    
+    > :not(.fixed-side) {
+        flex: 1;
+    }
+}
+
+/* 两侧固定宽度，中间宽度自适应 */
+@mixin two-sides-fixed-width($leftWidth: 100, $rightWidth: 100, $alignItems: normal) {
+    display: flex;
+    word-break: break-all;
+    align-items: #{$alignItems};
+
+    > :first-child {
+        width: if(unit($leftWidth) == '', #{$leftWidth} + 'px', #{$leftWidth});
+    }
+
+    > :nth-child(2) {
+        flex: 1;
+    }
+
+    > :last-child {
+        width: if(unit($rightWidth) == '', #{$rightWidth} + 'px', #{$rightWidth});
+    }
+}
+
+/* 分散对齐 */
+@mixin justify($direction: horizontal, $padding: '') {
+    display: flex;
+    justify-content: space-between;
+
+    @if($direction == 'vertical') {
+      flex-direction: column;
+    }
+    @else {
+      align-items: center;
+
+      @if($padding) {
+        padding: #{$padding};
+      }
+    }
+}
+
+/* 圣杯布局 */
+@mixin grail-layout($wholeHeight: 500, $topHeight: 50, $bottomHeight: 50){
+    height: if(unit($wholeHeight) == '', #{$wholeHeight} + 'px', #{$wholeHeight});
+    display: flex;
+    flex-direction: column;
+    word-break: break-all;
+
+    > :first-child {
+        height: if(unit($topHeight) == '', #{$topHeight} + 'px', #{$topHeight});
+    }
+
+    > :nth-child(2) {
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    > :last-child {
+        height: if(unit($bottomHeight) == '', #{$bottomHeight} + 'px', #{$bottomHeight});
+    }
+}
+
+/* 两列等高布局 */
+
+/* 图文布局 */
+
+/* 等分布局 */
+@mixin grid($direction: horizontal) {
+    display: flex;
+
+    @if($direction == 'vertical') {
+      flex-direction: column;
+    }
+
+    > * {
+      flex: 1;
+    }
+}

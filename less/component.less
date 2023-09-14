@@ -1,0 +1,182 @@
+@import './layout/center.less';
+@import './variable.less';
+
+/* 三角形 */
+.triangle(@borderWidth: 10, @shapeColor: #666, @direction: up) {
+    width: 0;
+    height: 0;
+
+    & when (isunit(@borderWidth, '')) {
+        border: unit(@borderWidth, px) solid transparent;;
+    }
+
+    & when not (isunit(@borderWidth, '')) {
+        border:  @borderWidth solid transparent;
+    }
+
+    @doubleBorderWidth: 2 * @borderWidth;
+
+    & when (isunit(@doubleBorderWidth, '')) {
+        @borderStyle: unit(@doubleBorderWidth, px) solid @shapeColor;
+
+        & when (@direction = up) {
+            border-bottom: @borderStyle;
+        }
+    
+        & when (@direction = down) {
+            border-top: @borderStyle;
+        }
+    
+        & when (@direction = left) {
+            border-right: @borderStyle;
+        }
+    
+        & when (@direction = right) {
+            border-left: @borderStyle;
+        }
+    }
+
+    & when not (isunit(@doubleBorderWidth, '')) {
+        @borderStyle:  @doubleBorderWidth solid @shapeColor;
+
+        & when (@direction = up) {
+            border-bottom: @borderStyle;
+        }
+
+        & when (@direction = down) {
+            border-top: @borderStyle;
+        }
+
+        & when (@direction = left) {
+            border-right: @borderStyle;
+        }
+
+        & when (@direction = right) {
+            border-left: @borderStyle;
+        }
+    }
+}
+
+/* 实心圆 */
+.disc(@diameter: 15, @bgColor: #666) {
+    border-radius: 50%;
+    
+    & when (isunit(@diameter, '')) {
+        width: unit(@diameter, px);
+        height: unit(@diameter, px);
+    }
+
+    & when not (isunit(@diameter, '')) {
+        width: @diameter;
+        height: @diameter;
+    }
+
+    & when (iscolor(@bgColor)) {
+      background-color: @bgColor;
+    }
+
+    & when not (iscolor(@bgColor)) {
+      background-image: @bgColor;
+    }
+}
+
+/* 宽高二比一矩形 */
+
+/* 
+* 图片遮罩层
+* shape: circle | rectangle
+*/
+.image-mask(@opacity: 0.7, @shape: circle, @zIndex: 1, @height: 30%) {
+    position: relative;
+  
+    > [class$="-mask"],
+    > [class$="-text"] {
+        position: absolute;
+        inset-inline: 0;
+        bottom: 0;
+  
+        & when (@shape = circle) {
+          top: 0;
+        }
+  
+        & when not (@shape = circle) {
+          & when (isunit(@height, '')) {
+            height: unit(@height, px);
+          }
+  
+          & when not (isunit(@height, '')) {
+            height: @height;
+          }
+        }
+    }
+  
+    > [class$="-mask"] {
+        z-index: @zIndex;
+        background-color: @black;
+        opacity: @opacity;
+  
+        & when (@shape = circle) {
+          border-radius: 50%;
+        }
+    }
+  
+    > [class$="-text"] {
+        z-index: @zIndex + 1;
+        color: @white;
+        word-break: break-all;
+  
+        .center;
+    }
+}
+
+/* 
+* 点
+* size: 尺寸，宽和高一样，默认是 5px
+* backgroundColor: 背景颜色，默认是白色
+* marginInline: 水平外边距，默认左右都是 5px
+*/
+.point(@size: 5px, @backgroundColor: @white, @marginInline: 5px) {
+    display: inline-block;
+    width: @size;
+    height: @size;
+    background-color: @backgroundColor;
+    border-radius: 50%;
+    margin-inline: @marginInline;
+    vertical-align: middle;
+}
+
+/* 
+* 间距
+* size: 间距大小，默认是 8px
+* align: 对齐方式，默认是 center，可选 start、end、baseline、center
+* direction: 间距方向，默认是 horizontal，可选 horizontal、vertical
+* wrap: 是否自动换行，仅在 horizontal 时有效，默认是 false
+*/
+.space(@size: 8px, @direction: horizontal, @align: center, @wrap: false) {
+    display: inline-flex;
+    gap: @size;
+
+    & when (@direction = vertical) {
+        flex-direction: column;
+    }
+
+    & when (@align = center) {
+        align-items: center;
+    }
+
+    & when (@align = start) {
+        align-items: flex-start;
+    }
+
+    & when (@align = end) {
+        align-items: flex-end;
+    }
+
+    & when (@align = baseline) {
+        align-items: baseline;
+    }
+
+    & when (@wrap = true) and (@direction = horizontal) {
+        flex-wrap: wrap;
+    }
+}

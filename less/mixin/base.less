@@ -1,0 +1,168 @@
+/* 宽度 */
+.w(@width) {
+  width: @width;
+}
+
+/* 高度 */
+.h(@height) {
+  height: @height;
+}
+
+/* 宽度 + 高度 */
+.wh(@width, @height) {
+  .w(@width);
+  .h(@height);
+}
+
+/* 字体大小 */
+.fz(@fontSize) {
+  font-size: @fontSize;
+}
+
+/* 字重 */
+.fw(@fontWeight: normal) {
+  font-weight: @fontWeight;
+}
+
+/* 字体大小 + 字重 */
+.fzw(@fontSize, @fontWeight: normal) {
+  .fz(@fontSize);
+  .fw(@fontWeight);
+}
+
+/* 上外边距 */
+.mt(@marginTop) {
+  margin-top: @marginTop;
+}
+
+/* 下外边距 */
+.mb(@marginBottom) {
+  margin-bottom: @marginBottom;
+}
+
+/* 左外边距 */
+.ml(@marginLeft) {
+  margin-left: @marginLeft;
+}
+
+/* 右外边距 */
+.mr(@marginRight) {
+  margin-right: @marginRight;
+}
+
+/* 左上外边距 */
+.mlt(@marginLeft, @marginTop) {
+  .ml(@marginLeft);
+  .mt(@marginTop);
+}
+
+/* 左下外边距 */
+.mlb(@marginLeft, @marginBottom) {
+  .ml(@marginLeft);
+  .mb(@marginBottom);
+}
+
+/* 右上外边距 */
+.mrt(@marginRight, @marginTop) {
+  .mr(@marginRight);
+  .mt(@marginTop);
+}
+
+/* 右下外边距 */
+.mrb(@marginRight, @marginBottom) {
+  .mr(@marginRight);
+  .mb(@marginBottom);
+}
+
+/* 下内边距 */
+.pb(@paddingBottom) {
+  padding-bottom: @paddingBottom;
+}
+
+/* 左内边距 */
+.pl(@paddingLeft) {
+  padding-left: @paddingLeft;
+}
+
+/* 右内边距 */
+.pr(@paddingRight) {
+  padding-right: @paddingRight;
+}
+
+/* 左上内边距 */
+.plt(@paddingLeft, @paddingTop) {
+  .pl(@paddingLeft);
+  .pt(@paddingTop);
+}
+
+/* 左下内边距 */
+.plb(@paddingLeft, @paddingBottom) {
+  .pl(@paddingLeft);
+  .pb(@paddingBottom);
+}
+
+/* 右上内边距 */
+.prt(@paddingRight, @paddingTop) {
+  .pr(@paddingRight);
+  .pt(@paddingTop);
+}
+
+/* 右下内边距 */
+.prb(@paddingRight, @paddingBottom) {
+  .pr(@paddingRight);
+  .pb(@paddingBottom);
+}
+
+/* 左 + 上位移 */
+.lt(@left, @top) {
+  left: @left;
+  top: @top;
+}
+
+/* 左 + 下位移 */
+.lb(@left, @bottom) {
+  left: @left;
+  bottom: @bottom;
+}
+
+/* 右 + 上位移 */
+.rt(@right, @top) {
+  right: @right;
+  top: @top;
+}
+
+/* 右 + 下位移 */
+.rb(@right, @bottom) {
+  right: @right;
+  bottom: @bottom;
+}
+
+/* flex 布局间隙 */
+.gap(@gap) {
+  gap: @gap;
+}
+
+/* 圆角 */
+.radius(@radius){
+  border-radius: @radius;
+}
+
+/* 颜色 */
+.color(@color) {
+  color: @color;
+}
+
+/* 背景颜色 */
+.bgColor(@bgColor) {
+  background-color: @bgColor;
+}
+
+/* 行高 */
+.lh(@lineHeight) {
+  line-height: @lineHeight;
+}
+
+/* 设置元素的堆叠顺序 */
+.index(@zIndex) {
+  z-index: @zIndex;
+}
